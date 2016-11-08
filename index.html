@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html ng-app="quiz">
+  <head>
+    <meta charset="utf-8">
+    <title>Quiz Application</title>
+
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css"/> 
+   
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+
+    <!-- Custom CSS and JS-->
+    <link rel="stylesheet" href="quiz_style.css">
+    <script src="quiz_app.js"></script>
+  </head>
+
+  <body>
+    <div ng-controller="quiz_app">
+      <div id="title">
+        <h2>Simple Quiz Application</h2>
+        <p>Using AngularJS</p>
+      </div>
+
+      <ul>
+        <li ng-repeat="question in questions">
+          <strong class="question">
+            {{ question.question }}
+          </strong>
+
+          <ul id="q_{{$parent.$index}}">
+            <li ng-repeat="answer in question.answers">
+              <label for="quest_{{$parent.$index}}_answer_{{$index}}">
+                <input type="radio" ng-model="answers[$parent.$index]" value="{{ answer.ans }}"  name="quest_{{$parent.$index}}_answers"/>
+                {{ answer.ans }}
+              </label>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <button class="btn" type="submit" ng:click="numCorrect()">Submit</button>
+      <button class="btn" id="addQ" ng:click="addQuestion()">Add Question</button>
+      <button class="btn" ng:click="removeQuestion()">Remove Question</button>
+
+      <div>
+        <p><b>Correct:</b> {{ correct }}</p>    
+      </div>
+    </div>
+    
+  </body>
+</html>
